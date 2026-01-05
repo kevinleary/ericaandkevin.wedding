@@ -74,19 +74,39 @@ const App = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <button className="md:hidden text-[#5B9AA0]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          <button 
+            className="md:hidden text-[#5B9AA0] focus:outline-none" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {/* ADDED: Wrapper div for rotation animation */}
+            <div className={`transition-transform duration-300 ease-in-out ${isMenuOpen ? 'rotate-90' : 'rotate-0'}`}>
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </div>
           </button>
-        </div>
+          </div>
 
         {/* Mobile Nav Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-[#FDFCF8] border-t border-[#E0EBEB] flex flex-col items-center py-8 space-y-6 text-sm uppercase tracking-widest font-sans animate-in fade-in slide-in-from-top-4">
-            {['our story', 'the venue', 'schedule', 'travel', 'rsvp'].map((item) => (
-              <button key={item} onClick={() => scrollTo(item.replace(' ', '-'))} className="text-[#467479]">{item}</button>
+        {/* CHANGED: Removed conditional rendering {isMenuOpen && ...} in favor of CSS transitions */}
+        <div 
+          className={`md:hidden absolute top-full left-0 w-full bg-[#FDFCF8] border-t border-[#E0EBEB] flex flex-col items-center transition-all duration-500 ease-in-out overflow-hidden ${
+            isMenuOpen ? 'max-h-[500px] opacity-100 py-8 shadow-lg' : 'max-h-0 opacity-0 py-0 shadow-none pointer-events-none'
+          }`}
+        >
+          <div className="flex flex-col items-center space-y-6 text-sm uppercase tracking-widest font-sans w-full">
+            {['our story', 'the venue', 'schedule', 'travel', 'rsvp'].map((item, index) => (
+              <button 
+                key={item} 
+                onClick={() => scrollTo(item.replace(' ', '-'))} 
+                // ADDED: Staggered animation for list items
+                className={`text-[#467479] hover:text-[#5B9AA0] py-2 transition-all duration-500 ${isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'}`}
+                style={{ transitionDelay: `${index * 50}ms` }}
+              >
+                {item}
+              </button>
             ))}
           </div>
-        )}
+        </div>
       </nav>
 
       {/* Hero Section */}
@@ -141,16 +161,32 @@ const App = () => {
       <section id="our-story" className="py-24 md:py-32 px-6 bg-[#FDFCF8]">
         <div className="max-w-3xl mx-auto text-center">
           <Heart className="mx-auto mb-8 text-[#5B9AA0] opacity-60" size={40} />
-          <h2 className="text-4xl md:text-5xl font-light mb-12 text-[#5B9AA0]">Our Journey</h2>
+          <h2 className="text-4xl md:text-5xl font-light mb-12 text-[#5B9AA0]">Our Story</h2>
           <div className="space-y-6 text-lg leading-relaxed text-[#467479] font-sans font-light">
             <p>
-              It started with a conversation about Lowcountry sunsets and a shared love for the coastal breeze. 
-              From weekend trips to Hilton Head to quiet mornings on the riverfront, 
-              we knew we wanted to share our "I do" in the heart of the place that feels most like home.
+              It all started 3 years ago at Gold's Gym in Arlington Virginia when a beautiful fit 
+              Erica approached a stretching Kevin regarding his Dallas Cowboys longsleeve. Little did
+              he know that their mutual disappointment, was not the only attribute they shared in common. 
+              After a few conversations, Kevin asked Erica to watch the upcoming playoff game. 
+              Erica declined, stating that she was already taken. While a shock to Kevin, he was able to
+              shrug off the momentary embarassment. 
             </p>
             <p>
-              We are so excited to welcome our closest friends and family to Okatie to celebrate 
-              the beginning of our next chapter together at the beautiful Legacy Lookout.
+              A few weeks later back at Gold's, Erica had approached
+              Kevin yet again to give him a glimmer of hope stating, "if things were different...". 
+              Oh things were different as Kevin had fallen deeply in love with Erica and proceeded to tell
+              everyone he knew about the potential future he could have had with her. Low and behold, Erica 
+              had felt love at first sight when she saw Kevin but couldn't explain that to anyone.
+            </p>
+            <p>
+              A year and a half later, Erica became single. Little did Kevin know she had seen him all over 
+              Arlington since the last time they saw one another. At 5AM as she was driving to Gold's she 
+              almost hit him with her car while he was walking to metro into work at the Navy.
+              Erica was unsure of Kevin's status but knew she had to try and get to know this handsome
+              Cowboys fan she had once encountered. So she sent Kevin's friend, Thiccbass a DM saying "What 
+              are you and Kevin doing tonight?" while out at Spider Kelly's and a few exchanges later, 
+              Kevin and Erica remet on that August night. A week later, they went on their first date where
+              Kevin took Erica on his Bass Tracker on the Potomac River in Washington, D.C. and the rest is history.
             </p>
           </div>
         </div>
@@ -200,11 +236,11 @@ const App = () => {
                 <div className="grid grid-cols-2 gap-4 border-y border-[#E0EBEB] py-6">
                   <div>
                     <h4 className="font-bold text-[#5B9AA0] text-xs uppercase mb-2">The Vibe</h4>
-                    <p className="text-sm">Southern Gothic meets Modern Luxury</p>
+                    <p className="text-sm">Southern Coastal meets Northern Tradition</p>
                   </div>
                   <div>
                     <h4 className="font-bold text-[#5B9AA0] text-xs uppercase mb-2">Highlight</h4>
-                    <p className="text-sm">Sunset cocktails on the deepwater dock house</p>
+                    <p className="text-sm">Intimate estate with timeless feel</p>
                   </div>
                 </div>
                 <p>
@@ -234,7 +270,7 @@ const App = () => {
               <div className="w-px h-12 bg-[#E0EBEB] mb-8" />
               <div className="flex items-center space-x-4 mb-4">
                 <Clock className="text-[#5B9AA0]/60" size={20} />
-                <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9]">4:30 PM</span>
+                <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9]">4:00 PM</span>
               </div>
               <h3 className="text-2xl mb-4 font-light text-[#5B9AA0]">Waterfront Ceremony</h3>
               <p className="text-[#467479] font-sans font-light italic">The Great Lawn facing the River</p>
@@ -244,11 +280,11 @@ const App = () => {
               <div className="w-px h-12 bg-[#E0EBEB] mb-8" />
               <div className="flex items-center space-x-4 mb-4">
                 <Clock className="text-[#5B9AA0]/60" size={20} />
-                <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9]">5:30 PM</span>
+                <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9]">5:00 PM</span>
               </div>
               <h3 className="text-2xl mb-4 font-light text-[#5B9AA0]">Cocktail Hour</h3>
               <p className="text-[#467479] font-sans font-light italic text-center max-w-sm">
-                Drinks and Hors d'oeuvres at the "James Bond" Dock House
+                Drinks and Hors d'oeuvres on The Great Lawn
               </p>
             </div>
 
@@ -256,11 +292,20 @@ const App = () => {
               <div className="w-px h-12 bg-[#E0EBEB] mb-8" />
               <div className="flex items-center space-x-4 mb-4">
                 <Clock className="text-[#5B9AA0]/60" size={20} />
+                <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9]">6:30 PM</span>
+              </div>
+              <h3 className="text-2xl mb-4 font-light text-[#5B9AA0]">First Dance</h3>
+              <p className="text-[#467479] font-sans font-light italic">The Great Lawn</p>
+            </div>
+            
+            <div className="relative flex flex-col items-center">
+              <div className="w-px h-12 bg-[#E0EBEB] mb-8" />
+              <div className="flex items-center space-x-4 mb-4">
+                <Clock className="text-[#5B9AA0]/60" size={20} />
                 <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9]">7:00 PM</span>
               </div>
-              <h3 className="text-2xl mb-4 font-light text-[#5B9AA0]">Dinner & Dancing</h3>
-              <p className="text-[#467479] font-sans font-light italic">The Main Pavillion</p>
-              <div className="w-px h-12 bg-[#E0EBEB] mt-8" />
+              <h3 className="text-2xl mb-4 font-light text-[#5B9AA0]">Dinner</h3>
+              <p className="text-[#467479] font-sans font-light italic">The Great Lawn</p>
             </div>
           </div>
         </div>
