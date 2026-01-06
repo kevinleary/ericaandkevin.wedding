@@ -164,7 +164,7 @@ const App = () => {
           <h2 className="text-4xl md:text-5xl font-light mb-12 text-[#5B9AA0]">Our Story</h2>
           <div className="space-y-6 text-lg leading-relaxed text-[#467479] font-sans font-light">
             <p>
-              It all started 3 years ago at Gold's Gym in Arlington Virginia when a beautiful fit 
+              It all started three years ago at Gold's Gym in Arlington Virginia when a beautiful fit 
               Erica approached a stretching Kevin regarding his Dallas Cowboys longsleeve. Little did
               he know that their mutual disappointment, was not the only attribute they shared in common. 
               After a few conversations, Kevin asked Erica to watch the upcoming playoff game. 
@@ -176,17 +176,38 @@ const App = () => {
               Kevin yet again to give him a glimmer of hope stating, "if things were different...". 
               Oh things were different as Kevin had fallen deeply in love with Erica and proceeded to tell
               everyone he knew about the potential future he could have had with her. Low and behold, Erica 
-              had felt love at first sight when she saw Kevin but couldn't explain that to anyone.
+              had also felt love at first sight when she saw Kevin but couldn't explain that given her 
+              current circumstances.
             </p>
             <p>
-              A year and a half later, Erica became single. Little did Kevin know she had seen him all over 
-              Arlington since the last time they saw one another. At 5AM as she was driving to Gold's she 
-              almost hit him with her car while he was walking to metro into work at the Navy.
-              Erica was unsure of Kevin's status but knew she had to try and get to know this handsome
-              Cowboys fan she had once encountered. So she sent Kevin's friend, Thiccbass a DM saying "What 
-              are you and Kevin doing tonight?" while out at Spider Kelly's and a few exchanges later, 
-              Kevin and Erica remet on that August night. A week later, they went on their first date where
-              Kevin took Erica on his Bass Tracker on the Potomac River in Washington, D.C. and the rest is history.
+              A year and a half later, Erica's circumstances had changed. Little did Kevin know she had seen him all over 
+              Arlington since the last time they saw one another. At 5AM, as she was driving to Gold's, she 
+              almost hit him with her car while he was walking to Metro into work at the Navy.
+              Erica was unsure of Kevin's status, but knew she had to try and get to know this handsome
+              Cowboys fan she had once encountered. While out at Spider Kelly's Erica sent Kevin's friend, Thiccbass, 
+              a DM asking, "What are you and Kevin doing tonight?" Kevin and Erica reconvened on that August evening. 
+              A week later, they went on their first date where Kevin took Erica for a cruise in his Bass Tracker on the Potomac River 
+              in Washington, D.C. Erica was blown-away that the Florida Man from Jersey showed off her home city better 
+              than she'd ever seen it.
+            </p>
+            <p>
+              As they got to know each other more and more each passing day, they realized that the SWAMP was no 
+              place for them. Through the grace of God by their continued and ever growing faith, Erica and Kevin 
+              hit the road and moved to South Carolina to fulfill their dreams of escaping to The South. They spent
+              every day together, almost inseperable except for Kevin's early morning fishing trips and Erica's 
+              walks with her adorable little Dachshund named Peyton. After three months, they decided to hit the road again
+              and find their light even further south in The Sunshine State. Erica and Kevin officially settled down
+              in Sarasota Florida where they are blessed everyday just to be alive and living in their new found home.
+            </p>
+            <p>
+              On December 17th, 2025, just off of Beer Can Island in Longboat Key, Kevin took Erica into The Gulf of 
+              America on his Bass Tracker. What was supposed to be just a "boat ride", turned into a intimate, sun-filled
+              proposal. Erica said yes to Kevin, on that same first date jon boat, which proves that it's not about the
+              size of the boat, it's about how you use it. 
+            </p>
+            <p>
+              For Erica and Kevin their union is more than coincidence it is "a God thing" and they are deeply thankful for
+              every unexpected turn that brought them to where they are now. 
             </p>
           </div>
         </div>
@@ -262,7 +283,29 @@ const App = () => {
       </section>
 
       {/* Schedule Section */}
-      <section id="schedule" className="py-24 md:py-32 px-6 bg-[#FDFCF8]">
+      <section id="schedule" className="py-24 md:py-32 px-6 bg-[#FDFCF8] relative overflow-hidden">
+        {/* Decorative background: Two Picture Frames with Images */}
+         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="grid grid-cols-2 gap-4 md:gap-32 opacity-15 max-w-5xl w-full px-4">
+               {/* Frame 1 */}
+               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform -rotate-3 rounded-sm translate-y-12 overflow-hidden bg-white shadow-xl">
+                 <img 
+                   src="3R5A2848.jpg" 
+                   alt="Wedding Detail" 
+                   className="w-full h-full object-cover grayscale"
+                 />
+               </div>
+               {/* Frame 2 */}
+               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform rotate-3 rounded-sm -translate-y-12 overflow-hidden bg-white shadow-xl">
+                 <img 
+                   src="3R5A3200.jpg" 
+                   alt="Wedding Detail" 
+                   className="w-full h-full object-cover grayscale"
+                 />
+               </div>
+            </div>
+         </div>
+
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-light mb-16 italic text-[#5B9AA0]">The Big Day</h2>
           <div className="space-y-16">
@@ -348,7 +391,8 @@ const App = () => {
                 <h3 className="text-xl font-light text-[#5B9AA0] mb-4">Where to Stay</h3>
                 <p className="font-sans font-light text-sm leading-relaxed mb-4">
                   We have reserved a block of rooms at the <strong>Hampton Inn & Suites Bluffton-Sun City</strong>. 
-                  The hotel is a <strong>20 minute drive</strong> to Legacy Lookout.
+                  The hotel is a <strong>20 minute drive</strong> to Legacy Lookout. After RSVPing, we will email
+                  you the Hotel Block Group and Code for reservation.
                 </p>
                 <div className="mb-6">
                    <p className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9] mb-2">Available Rooms:</p>
@@ -372,10 +416,13 @@ const App = () => {
               <div>
                 <h3 className="text-xl font-light text-[#5B9AA0] mb-4">Transportation</h3>
                 <p className="font-sans font-light text-sm leading-relaxed mb-6">
-                  A shuttle will be provided from the downtown Beaufort Inn at 3:45 PM on Saturday.
+                  Parking is available onsite for around <strong>20 vehicles</strong>. Because this is limited and there will 
+                  be alcohol served, we will potentially work with a shuttle company to bring guests to and from the Hampton 
+                  Inn Hotel depending on final reservation count. To further accomodate non-drivers, we also plan on providing 
+                  Uber and Lyft vouchers for use after the wedding ceremony.
                 </p>
               </div>
-              <p className="text-xs font-sans uppercase tracking-widest text-[#7FB5B9] opacity-60 italic">Parking available on-site</p>
+              <p className="text-xs font-sans uppercase tracking-widest text-[#7FB5B9] opacity-60 italic">Limited parking, rideshare vouchers, and potential shuttle</p>
             </div>
           </div>
         </div>
@@ -386,7 +433,7 @@ const App = () => {
         <div className="max-w-2xl mx-auto bg-white shadow-2xl p-10 md:p-16 rounded-sm border border-[#E0EBEB]">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-light mb-4 text-[#5B9AA0]">Kindly Respond</h2>
-            <p className="font-sans text-sm uppercase tracking-widest text-[#7FB5B9] font-medium">Please RSVP by April 1st, 2026</p>
+            <p className="font-sans text-sm uppercase tracking-widest text-[#7FB5B9] font-medium">Please RSVP by March 1st, 2026</p>
           </div>
 
           {RSVPStatus === 'success' ? (
@@ -428,27 +475,42 @@ const App = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Number of Guests</label>
+                  <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Bringing a +1?</label>
                   <select 
                     className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
                     value={formData.guests}
                     onChange={(e) => setFormData({...formData, guests: e.target.value})}
                   >
-                    <option value="1">1 Guest</option>
-                    <option value="2">2 Guests</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
                   </select>
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Dietary Restrictions</label>
-                <textarea 
-                  rows="2"
-                  className="w-full border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] transition-colors font-light text-[#467479] bg-transparent"
-                  placeholder="Allergies or preferences?"
-                  value={formData.dietary}
-                  onChange={(e) => setFormData({...formData, dietary: e.target.value})}
-                ></textarea>
+              {/* REPLACED: Dietary restrictions with Hotel and Driving questions */}
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Plan to Book Hotel?</label>
+                  <select 
+                    className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
+                    value={formData.hotel}
+                    onChange={(e) => setFormData({...formData, hotel: e.target.value})}
+                  >
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Plan on driving to venue?</label>
+                  <select 
+                    className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
+                    value={formData.driving}
+                    onChange={(e) => setFormData({...formData, driving: e.target.value})}
+                  >
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
               </div>
 
               <button 
@@ -481,7 +543,7 @@ const App = () => {
         <h2 className="text-4xl italic font-light mb-6 text-[#5B9AA0]">Erica & Kevin</h2>
         <div className="flex justify-center space-x-6 mb-8 text-[#A7D0D2]">
           <Camera size={20} />
-          <span className="font-sans text-sm tracking-[0.2em] uppercase">#LowcountryLove2026</span>
+          <span className="font-sans text-sm tracking-[0.2em] uppercase">#LearysLowcountryLove</span>
         </div>
         <p className="font-sans text-[10px] uppercase tracking-widest text-[#A7D0D2]">
           Made with love for our family and friends.
