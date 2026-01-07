@@ -18,15 +18,28 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [RSVPStatus, setRSVPStatus] = useState('idle'); // idle, loading, success
+  const [showHoneyfund, setShowHoneyfund] = useState(false); // ADDED: State for modal
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     attending: 'yes',
-    guests: '1',
-    dietary: ''
+    plus1: 'no',
+    hotel: 'yes',
+    driving: 'no'
   });
 
   useEffect(() => {
+    // Set the page title
+    document.title = "Erica & Kevin | May 23, 2026";
+
+    // Set the favicon (Minimal Powerboat SVG)
+    const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
+    link.type = 'image/svg+xml';
+    link.rel = 'icon';
+    // Updated SVG path for a powerboat/speedboat shape
+    link.href = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B9AA0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M2 17h20'/><path d='M22 17l-2 3H4l-2-3'/><path d='M15 17l-2-4h-5l-1 4'/></svg>`;
+    document.head.appendChild(link);
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
@@ -42,33 +55,77 @@ const App = () => {
     setIsMenuOpen(false);
   };
 
-  const handleRSVP = (e) => {
+  const handleRSVP = async (e) => {
     e.preventDefault();
     setRSVPStatus('loading');
-    // Simulate API call
-    setTimeout(() => {
-      setRSVPStatus('success');
-    }, 1500);
+
+    try {
+      // REPLACE with your actual Formspree endpoint
+      const response = await fetch("https://formspree.io/f/xgovgvvj", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setRSVPStatus('success');
+        // Optional: clear form after success
+        setFormData({
+          name: '',
+          email: '',
+          attending: 'yes',
+          guests: '1',
+          hotel: 'yes',
+          driving: 'no'
+        });
+      } else {
+        console.error("Form submission failed");
+        alert("There was a problem submitting your RSVP. Please try again.");
+        setRSVPStatus('idle');
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("There was a problem submitting your RSVP. Please check your connection and try again.");
+      setRSVPStatus('idle');
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFCF8] text-[#467479] font-serif">
+    <div className="min-h-screen bg-[#FDFCF8] text-[#467479] font-serif selection:bg-[#5B9AA0] selection:text-white">
+      {/* Custom Styles for animations since tailwindcss-animate might not be present */}
+      <style>{`
+        @keyframes slideUpFade {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-up {
+          animation: slideUpFade 1.2s ease-out forwards;
+        }
+        .animate-delay-500 {
+          animation-delay: 0.5s;
+        }
+      `}</style>
+
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#FDFCF8]/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-6'}`}>
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
-          <div className="text-2xl font-light tracking-widest cursor-pointer text-[#5B9AA0]" onClick={() => scrollTo('hero')}>
+          <div className="text-2xl font-light tracking-widest cursor-pointer text-[#5B9AA0] hover:opacity-80 transition-opacity" onClick={() => scrollTo('hero')}>
             E & K
           </div>
           
           {/* Desktop Nav */}
           <div className="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-sans font-medium text-[#467479]">
-            {['our story', 'the venue', 'schedule', 'travel', 'rsvp'].map((item) => (
+            {['our story', 'the venue', 'schedule', 'travel', 'rsvp', 'registry'].map((item) => (
               <button 
                 key={item} 
                 onClick={() => scrollTo(item.replace(' ', '-'))}
-                className="hover:text-[#5B9AA0] transition-colors"
+                className="hover:text-[#5B9AA0] transition-colors relative group"
               >
                 {item}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5B9AA0] transition-all group-hover:w-full opacity-50"></span>
               </button>
             ))}
           </div>
@@ -94,7 +151,7 @@ const App = () => {
           }`}
         >
           <div className="flex flex-col items-center space-y-6 text-sm uppercase tracking-widest font-sans w-full">
-            {['our story', 'the venue', 'schedule', 'travel', 'rsvp'].map((item, index) => (
+            {['our story', 'the venue', 'schedule', 'travel', 'rsvp', 'registry'].map((item, index) => (
               <button 
                 key={item} 
                 onClick={() => scrollTo(item.replace(' ', '-'))} 
@@ -164,7 +221,7 @@ const App = () => {
           <h2 className="text-4xl md:text-5xl font-light mb-12 text-[#5B9AA0]">Our Story</h2>
           <div className="space-y-6 text-lg leading-relaxed text-[#467479] font-sans font-light">
             <p>
-              It all started three years ago at Gold's Gym in Arlington Virginia when a beautiful fit 
+              It all started three years ago at Gold's Gym in Arlington, Virginia when a beautiful fit 
               Erica approached a stretching Kevin regarding his Dallas Cowboys longsleeve. Little did
               he know that their mutual disappointment, was not the only attribute they shared in common. 
               After a few conversations, Kevin asked Erica to watch the upcoming playoff game. 
@@ -180,15 +237,14 @@ const App = () => {
               current circumstances.
             </p>
             <p>
-              A year and a half later, Erica's circumstances had changed. Little did Kevin know she had seen him all over 
-              Arlington since the last time they saw one another. At 5AM, as she was driving to Gold's, she 
-              almost hit him with her car while he was walking to Metro into work at the Navy.
-              Erica was unsure of Kevin's status, but knew she had to try and get to know this handsome
-              Cowboys fan she had once encountered. While out at Spider Kelly's Erica sent Kevin's friend, Thiccbass, 
-              a DM asking, "What are you and Kevin doing tonight?" Kevin and Erica reconvened on that August evening. 
-              A week later, they went on their first date where Kevin took Erica for a cruise in his Bass Tracker on the Potomac River 
-              in Washington, D.C. Erica was blown-away that the Florida Man from Jersey showed off her home city better 
-              than she'd ever seen it.
+              As time stretched on, Erica had seen Kevin all over Arlington since their last interaction. In one 
+              instance, at 5AM as she was driving to Gold's, Erica almost hit Kevin while he was beginning his morning 
+              commute to Navy Yard. A year and a half later, Erica's circumstances had changed. She was unsure of Kevin's status, 
+              but knew she had to try and get to know this handsome Cowboys fan she had once encountered. While out at Spider 
+              Kelly's Erica sent Kevin's friend, Thiccbass, a DM asking, "What are you and Kevin doing tonight?" Kevin and Erica 
+              reconvened on that August evening. A week later, they went on their first date where Kevin took Erica for a cruise 
+              in his Bass Tracker on the Potomac River in Washington, D.C. Erica was blown-away that the Florida Man from Jersey 
+              showed off her home city better than she'd ever seen it.
             </p>
             <p>
               As they got to know each other more and more each passing day, they realized that the SWAMP was no 
@@ -196,12 +252,12 @@ const App = () => {
               hit the road and moved to South Carolina to fulfill their dreams of escaping to The South. They spent
               every day together, almost inseperable except for Kevin's early morning fishing trips and Erica's 
               walks with her adorable little Dachshund named Peyton. After three months, they decided to hit the road again
-              and find their light even further south in The Sunshine State. Erica and Kevin officially settled down
-              in Sarasota Florida where they are blessed everyday just to be alive and living in their new found home.
+              where they found their light further south in The Sunshine State. Erica and Kevin officially settled down
+              in Sarasota, Florida where they are blessed everyday just to be alive and living in their new found home.
             </p>
             <p>
               On December 17th, 2025, just off of Beer Can Island in Longboat Key, Kevin took Erica into The Gulf of 
-              America on his Bass Tracker. What was supposed to be just a "boat ride", turned into a intimate, sun-filled
+              America on his Bass Tracker. What was supposed to be just a "boat ride", turned into an intimate, sun-filled
               proposal. Erica said yes to Kevin, on that same first date jon boat, which proves that it's not about the
               size of the boat, it's about how you use it. 
             </p>
@@ -284,11 +340,12 @@ const App = () => {
 
       {/* Schedule Section */}
       <section id="schedule" className="py-24 md:py-32 px-6 bg-[#FDFCF8] relative overflow-hidden">
-        {/* Decorative background: Two Picture Frames with Images */}
+        {/* Decorative background: Picture Frames with Images */}
          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="grid grid-cols-2 gap-4 md:gap-32 opacity-15 max-w-5xl w-full px-4">
+            {/* UPDATED: Increased gap-y (vertical gap) significantly for mobile to separate the rows */}
+            <div className="grid grid-cols-2 gap-4 gap-y-32 md:gap-16 opacity-15 max-w-5xl w-full px-4 items-center">
                {/* Frame 1 */}
-               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform -rotate-3 rounded-sm translate-y-12 overflow-hidden bg-white shadow-xl">
+               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform -rotate-1 rounded-sm translate-y-4 overflow-hidden bg-white shadow-xl">
                  <img 
                    src="3R5A2848.jpg" 
                    alt="Wedding Detail" 
@@ -296,9 +353,25 @@ const App = () => {
                  />
                </div>
                {/* Frame 2 */}
-               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform rotate-3 rounded-sm -translate-y-12 overflow-hidden bg-white shadow-xl">
+               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform rotate-1 rounded-sm translate-y-4 overflow-hidden bg-white shadow-xl">
                  <img 
                    src="3R5A3200.jpg" 
+                   alt="Wedding Detail" 
+                   className="w-full h-full object-cover grayscale"
+                 />
+               </div>
+               {/* Frame 3 */}
+               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform rotate-2 rounded-sm -translate-y-4 overflow-hidden bg-white shadow-xl">
+                 <img 
+                   src="3R5A3144.jpg" 
+                   alt="Wedding Detail" 
+                   className="w-full h-full object-cover grayscale"
+                 />
+               </div>
+               {/* Frame 4 */}
+               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform -rotate-2 rounded-sm -translate-y-4 overflow-hidden bg-white shadow-xl">
+                 <img 
+                   src="3R5A3185.jpg" 
                    alt="Wedding Detail" 
                    className="w-full h-full object-cover grayscale"
                  />
@@ -391,8 +464,8 @@ const App = () => {
                 <h3 className="text-xl font-light text-[#5B9AA0] mb-4">Where to Stay</h3>
                 <p className="font-sans font-light text-sm leading-relaxed mb-4">
                   We have reserved a block of rooms at the <strong>Hampton Inn & Suites Bluffton-Sun City</strong>. 
-                  The hotel is a <strong>20 minute drive</strong> to Legacy Lookout. After RSVPing, we will email
-                  you the Hotel Block Group and Code for reservation.
+                  The hotel is a <strong>20 minute drive</strong> to Legacy Lookout. <strong>After RSVPing, we will email
+                  you the Hotel Block Group and Code for reservation</strong>.
                 </p>
                 <div className="mb-6">
                    <p className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9] mb-2">Available Rooms:</p>
@@ -418,8 +491,8 @@ const App = () => {
                 <p className="font-sans font-light text-sm leading-relaxed mb-6">
                   Parking is available onsite for around <strong>20 vehicles</strong>. Because this is limited and there will 
                   be alcohol served, we will potentially work with a shuttle company to bring guests to and from the Hampton 
-                  Inn Hotel depending on final reservation count. To further accomodate non-drivers, we also plan on providing 
-                  Uber and Lyft vouchers for use after the wedding ceremony.
+                  Inn Hotel depending on final reservation count. To further accomodate non-drivers, we also plan on 
+                  <strong> providing Uber and Lyft vouchers</strong> for use after the wedding ceremony.
                 </p>
               </div>
               <p className="text-xs font-sans uppercase tracking-widest text-[#7FB5B9] opacity-60 italic">Limited parking, rideshare vouchers, and potential shuttle</p>
@@ -462,6 +535,20 @@ const App = () => {
                 />
               </div>
 
+              {/* Added Email Input for Formspree */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Email Address</label>
+                <input 
+                  type="email" 
+                  name="email"
+                  required
+                  className="w-full border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] transition-colors text-lg font-light text-[#467479] bg-transparent"
+                  placeholder="name@example.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                />
+              </div>
+
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Attendance</label>
@@ -478,8 +565,8 @@ const App = () => {
                   <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Bringing a +1?</label>
                   <select 
                     className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
-                    value={formData.guests}
-                    onChange={(e) => setFormData({...formData, guests: e.target.value})}
+                    value={formData.plus1}
+                    onChange={(e) => setFormData({...formData, plus1: e.target.value})}
                   >
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
@@ -526,17 +613,83 @@ const App = () => {
       </section>
 
       {/* Registry */}
-      <section className="bg-[#FDFCF8] py-24 md:py-32 px-6 text-center">
+      <section id="registry" className="bg-[#FDFCF8] py-24 md:py-32 px-6 text-center">
         <Gift className="mx-auto mb-6 text-[#A7D0D2]" size={32} />
         <h2 className="text-3xl font-light mb-8 italic text-[#5B9AA0]">Gifts & Registry</h2>
         <p className="max-w-md mx-auto font-sans font-light text-[#467479] mb-10 leading-relaxed">
           Your presence is the greatest gift of all. If you wish to honor us with a contribution, we have a honeymoon fund set up for our first adventure as a married couple.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <button className="bg-white border border-[#E0EBEB] px-8 py-3 font-sans text-xs uppercase tracking-widest hover:border-[#5B9AA0] hover:text-[#5B9AA0] transition-colors text-[#7FB5B9]">HoneyFund</button>
-          <button className="bg-white border border-[#E0EBEB] px-8 py-3 font-sans text-xs uppercase tracking-widest hover:border-[#5B9AA0] hover:text-[#5B9AA0] transition-colors text-[#7FB5B9]">Crate & Barrel</button>
+          <button 
+            className="bg-white border border-[#E0EBEB] px-10 py-4 font-sans text-xs uppercase tracking-widest hover:border-[#5B9AA0] hover:text-[#5B9AA0] transition-colors text-[#7FB5B9] shadow-sm hover:shadow-md"
+            onClick={() => setShowHoneyfund(true)}
+          >
+            Honeymoon Fund
+          </button>
+          <button className="bg-white border border-[#E0EBEB] px-10 py-4 font-sans text-xs uppercase tracking-widest hover:border-[#5B9AA0] hover:text-[#5B9AA0] transition-colors text-[#7FB5B9] shadow-sm hover:shadow-md"
+            onClick={() => window.open('https://www.crateandbarrel.com/gift-registry/erica-boyd/r7464324', '_blank')}
+            >
+            Crate & Barrel
+          </button>
+          <button className="bg-white border border-[#E0EBEB] px-10 py-4 font-sans text-xs uppercase tracking-widest hover:border-[#5B9AA0] hover:text-[#5B9AA0] transition-colors text-[#7FB5B9] shadow-sm hover:shadow-md"
+            onClick={() => window.open('https://www.williams-sonoma.com/registry/g9gxjbv2gq/registry-list.html', '_blank')}
+            >
+            WILLIAMS SONOMA
+          </button>
         </div>
       </section>
+
+      {/* HoneyFund Modal (ADDED) */}
+      {showHoneyfund && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center px-4">
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowHoneyfund(false)} />
+          <div className="relative bg-[#FDFCF8] p-8 md:p-12 max-w-lg w-full shadow-2xl rounded-sm border border-[#E0EBEB] animate-slide-up">
+            <button 
+              onClick={() => setShowHoneyfund(false)}
+              className="absolute top-4 right-4 text-[#5B9AA0] hover:text-[#467479] transition-colors"
+            >
+              <X size={24} />
+            </button>
+            
+            <div className="text-center space-y-6">
+              <div className="aspect-video w-full overflow-hidden rounded-sm bg-[#EAF5F6]">
+                 <img 
+                   src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                   alt="Honeymoon Beach" 
+                   className="w-full h-full object-cover"
+                 />
+              </div>
+              
+              <div>
+                <h3 className="text-2xl font-light text-[#5B9AA0] mb-2">Our Honeymoon Fund</h3>
+                <p className="font-sans font-light text-[#467479] leading-relaxed">
+                  We are planning a Honeymoon trip! Please click on the buttons below to help donate to our Honeymoon. Thank you for helping us create memories that will last a lifetime.
+                </p>
+              </div>
+              
+              <div className="flex flex-col gap-3 pt-2">
+                <button 
+                   className="bg-[#5B9AA0] text-white px-8 py-3 font-sans text-xs uppercase tracking-widest hover:bg-[#467479] transition-colors shadow-lg w-full"
+                   onClick={() => window.open('https://www.paypal.com/paypalme/KevinLeary853', '_blank')}
+                >
+                  PayPal Us
+                </button>
+                <button 
+                   className="bg-[#5B9AA0] text-white px-8 py-3 font-sans text-xs uppercase tracking-widest hover:bg-[#467479] transition-colors shadow-sm w-full"
+                   onClick={() => window.open('https://venmo.com/u/kleary10', '_blank')}
+                >
+                  Venmo Us
+                </button>
+                <button 
+                   className="bg-white border border-[#5B9AA0] text-[#5B9AA0] px-8 py-3 font-sans text-xs uppercase tracking-widest hover:bg-[#EAF5F6] transition-colors shadow-sm w-full"
+                >
+                  or Zelle Us (via Kevin's phone number)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="py-20 bg-white text-center border-t border-[#E0EBEB]">
