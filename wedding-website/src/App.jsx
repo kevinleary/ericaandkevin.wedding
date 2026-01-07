@@ -32,6 +32,25 @@ const App = () => {
     // Set the page title
     document.title = "Erica & Kevin | May 23, 2026";
 
+    // Set Open Graph Meta Tags for Link Previews (iMessage, etc.)
+    const metaTags = [
+      { property: 'og:title', content: 'Erica & Kevin | May 21-24, 2026' },
+      { property: 'og:description', content: 'Join us for our wedding celebration in Okatie, South Carolina.' },
+      { property: 'og:image', content: 'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' },
+      { property: 'og:url', content: window.location.href },
+      { property: 'og:type', content: 'website' }
+    ];
+
+    metaTags.forEach(tag => {
+      let element = document.querySelector(`meta[property="${tag.property}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute('property', tag.property);
+        document.head.appendChild(element);
+      }
+      element.setAttribute('content', tag.content);
+    });
+
     // Set the favicon (Minimal Powerboat SVG)
     const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
     link.type = 'image/svg+xml';
@@ -122,7 +141,7 @@ const App = () => {
               <button 
                 key={item} 
                 onClick={() => scrollTo(item.replace(' ', '-'))}
-                className="hover:text-[#5B9AA0] transition-colors relative group"
+                className="hover:text-[#5B9AA0] transition-colors cursor-pointer relative group"
               >
                 {item}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5B9AA0] transition-all group-hover:w-full opacity-50"></span>
@@ -199,7 +218,7 @@ const App = () => {
           <div className="mt-12">
             <button 
               onClick={() => scrollTo('rsvp')}
-              className="bg-[#5B9AA0]/90 backdrop-blur-sm text-white px-10 py-4 font-sans uppercase tracking-widest text-sm hover:bg-[#467479] transition-all rounded-sm shadow-xl"
+              className="bg-[#5B9AA0]/90 backdrop-blur-sm text-white px-10 py-4 font-sans uppercase tracking-widest cursor-pointer text-sm hover:bg-[#467479] transition-all rounded-sm shadow-xl"
             >
               Kindly RSVP
             </button>
@@ -208,7 +227,7 @@ const App = () => {
 
         <button 
           onClick={() => scrollTo('our-story')}
-          className="absolute bottom-10 animate-bounce text-[#467479]"
+          className="absolute bottom-10 animate-bounce cursor-pointer text-[#467479]"
         >
           <ChevronDown size={32} />
         </button>
@@ -603,7 +622,7 @@ const App = () => {
               <button 
                 type="submit" 
                 disabled={RSVPStatus === 'loading'}
-                className="w-full bg-[#5B9AA0] text-white py-5 uppercase tracking-[0.2em] font-medium text-sm hover:bg-[#467479] transition-all disabled:opacity-50"
+                className="w-full bg-[#5B9AA0] text-white py-5 uppercase tracking-[0.2em] font-medium cursor-pointer text-sm hover:bg-[#467479] transition-all disabled:opacity-50"
               >
                 {RSVPStatus === 'loading' ? 'Sending...' : 'Send RSVP'}
               </button>
@@ -621,17 +640,17 @@ const App = () => {
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <button 
-            className="bg-white border border-[#E0EBEB] px-10 py-4 font-sans text-xs uppercase tracking-widest hover:border-[#5B9AA0] hover:text-[#5B9AA0] transition-colors text-[#7FB5B9] shadow-sm hover:shadow-md"
+            className="bg-white border border-[#E0EBEB] px-10 py-4 font-sans cursor-pointer text-xs uppercase tracking-widest hover:border-[#5B9AA0] hover:text-[#5B9AA0] transition-colors text-[#7FB5B9] shadow-sm hover:shadow-md"
             onClick={() => setShowHoneyfund(true)}
           >
             Honeymoon Fund
           </button>
-          <button className="bg-white border border-[#E0EBEB] px-10 py-4 font-sans text-xs uppercase tracking-widest hover:border-[#5B9AA0] hover:text-[#5B9AA0] transition-colors text-[#7FB5B9] shadow-sm hover:shadow-md"
+          <button className="bg-white border border-[#E0EBEB] px-10 py-4 font-sans cursor-pointer text-xs uppercase tracking-widest hover:border-[#5B9AA0] hover:text-[#5B9AA0] transition-colors text-[#7FB5B9] shadow-sm hover:shadow-md"
             onClick={() => window.open('https://www.crateandbarrel.com/gift-registry/erica-boyd/r7464324', '_blank')}
             >
             Crate & Barrel
           </button>
-          <button className="bg-white border border-[#E0EBEB] px-10 py-4 font-sans text-xs uppercase tracking-widest hover:border-[#5B9AA0] hover:text-[#5B9AA0] transition-colors text-[#7FB5B9] shadow-sm hover:shadow-md"
+          <button className="bg-white border border-[#E0EBEB] px-10 py-4 font-sans cursor-pointer text-xs uppercase tracking-widest hover:border-[#5B9AA0] hover:text-[#5B9AA0] transition-colors text-[#7FB5B9] shadow-sm hover:shadow-md"
             onClick={() => window.open('https://www.williams-sonoma.com/registry/g9gxjbv2gq/registry-list.html', '_blank')}
             >
             WILLIAMS SONOMA
@@ -646,7 +665,7 @@ const App = () => {
           <div className="relative bg-[#FDFCF8] p-8 md:p-12 max-w-lg w-full shadow-2xl rounded-sm border border-[#E0EBEB] animate-slide-up">
             <button 
               onClick={() => setShowHoneyfund(false)}
-              className="absolute top-4 right-4 text-[#5B9AA0] hover:text-[#467479] transition-colors"
+              className="absolute top-4 right-4 text-[#5B9AA0] cursor-pointer hover:text-[#467479] transition-colors"
             >
               <X size={24} />
             </button>
@@ -669,13 +688,13 @@ const App = () => {
               
               <div className="flex flex-col gap-3 pt-2">
                 <button 
-                   className="bg-[#5B9AA0] text-white px-8 py-3 font-sans text-xs uppercase tracking-widest hover:bg-[#467479] transition-colors shadow-lg w-full"
+                   className="bg-[#5B9AA0] text-white px-8 py-3 font-sans cursor-pointer text-xs uppercase tracking-widest hover:bg-[#467479] transition-colors shadow-lg w-full"
                    onClick={() => window.open('https://www.paypal.com/paypalme/KevinLeary853', '_blank')}
                 >
                   PayPal Us
                 </button>
                 <button 
-                   className="bg-[#5B9AA0] text-white px-8 py-3 font-sans text-xs uppercase tracking-widest hover:bg-[#467479] transition-colors shadow-sm w-full"
+                   className="bg-[#5B9AA0] text-white px-8 py-3 font-sans cursor-pointer text-xs uppercase tracking-widest hover:bg-[#467479] transition-colors shadow-sm w-full"
                    onClick={() => window.open('https://venmo.com/u/kleary10', '_blank')}
                 >
                   Venmo Us
