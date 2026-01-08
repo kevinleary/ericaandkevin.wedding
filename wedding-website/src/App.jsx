@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Heart, 
   MapPin, 
@@ -145,7 +145,7 @@ const App = () => {
           
           {/* Desktop Nav */}
           <div className="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-sans font-medium text-[#467479]">
-            {['our story', 'the venue', 'schedule', 'travel', 'rsvp', 'registry'].map((item) => (
+            {['our story', 'the venue', 'schedule', 'details', 'rsvp', 'registry'].map((item) => (
               <button 
                 key={item} 
                 onClick={() => scrollTo(item.replace(' ', '-'))}
@@ -178,7 +178,7 @@ const App = () => {
           }`}
         >
           <div className="flex flex-col items-center space-y-6 text-sm uppercase tracking-widest font-sans w-full">
-            {['our story', 'the venue', 'schedule', 'travel', 'rsvp', 'registry'].map((item, index) => (
+            {['our story', 'the venue', 'schedule', 'details', 'rsvp', 'registry'].map((item, index) => (
               <button 
                 key={item} 
                 onClick={() => scrollTo(item.replace(' ', '-'))} 
@@ -372,130 +372,149 @@ const App = () => {
             {/* UPDATED: Increased gap-y (vertical gap) significantly for mobile to separate the rows */}
             <div className="grid grid-cols-2 gap-4 gap-y-32 md:gap-16 opacity-15 max-w-5xl w-full px-4 items-center">
                {/* Frame 1 */}
-               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform -rotate-1 rounded-sm translate-y-4 overflow-hidden bg-white shadow-xl">
+               <AnimatedFrame className="aspect-[3/4] border-4 border-[#5B9AA0] transform -rotate-1 rounded-sm translate-y-4 overflow-hidden bg-white shadow-xl">
                  <img 
                    src="3R5A2848.jpg" 
                    alt="Wedding Detail" 
                    className="w-full h-full object-cover grayscale"
                  />
-               </div>
+               </AnimatedFrame>
                {/* Frame 2 */}
-               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform rotate-1 rounded-sm translate-y-4 overflow-hidden bg-white shadow-xl">
+               <AnimatedFrame className="aspect-[3/4] border-4 border-[#5B9AA0] transform rotate-1 rounded-sm translate-y-4 overflow-hidden bg-white shadow-xl">
                  <img 
                    src="3R5A3200.jpg" 
                    alt="Wedding Detail" 
                    className="w-full h-full object-cover grayscale"
                  />
-               </div>
+               </AnimatedFrame>
                {/* Frame 3 */}
-               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform rotate-2 rounded-sm -translate-y-4 overflow-hidden bg-white shadow-xl">
+               <AnimatedFrame className="aspect-[3/4] border-4 border-[#5B9AA0] transform rotate-2 rounded-sm -translate-y-4 overflow-hidden bg-white shadow-xl">
                  <img 
                    src="3R5A3144.jpg" 
                    alt="Wedding Detail" 
                    className="w-full h-full object-cover grayscale"
                  />
-               </div>
+               </AnimatedFrame>
                {/* Frame 4 */}
-               <div className="aspect-[3/4] border-4 border-[#5B9AA0] transform -rotate-2 rounded-sm -translate-y-4 overflow-hidden bg-white shadow-xl">
+               <AnimatedFrame className="aspect-[3/4] border-4 border-[#5B9AA0] transform -rotate-2 rounded-sm -translate-y-4 overflow-hidden bg-white shadow-xl">
                  <img 
                    src="3R5A3185.jpg" 
                    alt="Wedding Detail" 
                    className="w-full h-full object-cover grayscale"
                  />
-               </div>
+               </AnimatedFrame>
             </div>
          </div>
 
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-light mb-16 italic text-[#5B9AA0]">The Big Day</h2>
-          <p className="text-xl tracking-widest uppercase text-[#7FB5B9] mb-16 font-light">May 23, 2026</p>
-          <div className="space-y-16">
-            <div className="relative flex flex-col items-center">
-              <div className="w-px h-12 bg-[#E0EBEB] mb-8" />
-              <div className="flex items-center space-x-4 mb-4">
-                <Clock className="text-[#5B9AA0]/60" size={20} />
-                <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9]">4:00 PM</span>
+        {/* ADDED: bg-white/40 backdrop-blur-[2px] rounded-sm p-8 md:p-16 border border-white/20 shadow-sm */}
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-3xl md:text-6xl font-light mb-16 italic text-[#5B9AA0]">The Weekend</h2>
+          
+          {/* Friday Schedule */}
+          <div className="mb-20">
+            <p className="text-xl tracking-widest uppercase text-[#7FB5B9] mb-12 font-light border-b border-[#E0EBEB] pb-4 inline-block px-8">Friday, May 22, 2026</p>
+            <div className="space-y-16">
+              <div className="relative flex flex-col items-center group">
+                {/* No top line for first item of the day */}
+                <div className="flex items-center space-x-4 mb-4">
+                  <Clock className="text-[#5B9AA0]/60" size={20} />
+                  <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9] font-semibold">5:30 PM</span>
+                </div>
+                <h3 className="text-3xl mb-4 font-light text-[#5B9AA0]">Rehearsal Dinner</h3>
+                <p className="text-[#467479] font-sans font-light italic text-lg">Low Country Boil & BBQ</p>
               </div>
-              <h3 className="text-2xl mb-4 font-light text-[#5B9AA0]">Waterfront Ceremony</h3>
-              <p className="text-[#467479] font-sans font-light italic">The Great Lawn facing the River</p>
             </div>
+          </div>
 
-            <div className="relative flex flex-col items-center">
-              <div className="w-px h-12 bg-[#E0EBEB] mb-8" />
-              <div className="flex items-center space-x-4 mb-4">
-                <Clock className="text-[#5B9AA0]/60" size={20} />
-                <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9]">5:00 PM</span>
+          {/* Saturday Schedule */}
+          <div>
+            <p className="text-xl tracking-widest uppercase text-[#7FB5B9] mb-12 font-light border-b border-[#E0EBEB] pb-4 inline-block px-8">Saturday, May 23, 2026</p>
+            <div className="space-y-16">
+              <div className="relative flex flex-col items-center group">
+                <div className="flex items-center space-x-4 mb-4">
+                  <Clock className="text-[#5B9AA0]/60" size={20} />
+                  <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9] font-semibold">4:00 PM</span>
+                </div>
+                <h3 className="text-3xl mb-4 font-light text-[#5B9AA0]">Waterfront Ceremony</h3>
+                <p className="text-[#467479] font-sans font-light italic text-lg">The Great Lawn facing the River</p>
               </div>
-              <h3 className="text-2xl mb-4 font-light text-[#5B9AA0]">Cocktail Hour</h3>
-              <p className="text-[#467479] font-sans font-light italic text-center max-w-sm">
-                Drinks and Hors d'oeuvres on The Great Lawn
-              </p>
-            </div>
 
-            <div className="relative flex flex-col items-center">
-              <div className="w-px h-12 bg-[#E0EBEB] mb-8" />
-              <div className="flex items-center space-x-4 mb-4">
-                <Clock className="text-[#5B9AA0]/60" size={20} />
-                <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9]">6:30 PM</span>
+              <div className="relative flex flex-col items-center group">
+                <div className="w-px h-12 bg-[#E0EBEB] mb-8 group-hover:bg-[#5B9AA0] transition-colors" />
+                <div className="flex items-center space-x-4 mb-4">
+                  <Clock className="text-[#5B9AA0]/60" size={20} />
+                  <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9] font-semibold">4:45 PM</span>
+                </div>
+                <h3 className="text-3xl mb-4 font-light text-[#5B9AA0]">Cocktail Hour</h3>
+                <p className="text-[#467479] font-sans font-light italic text-center max-w-sm text-lg">
+                  Speciality Cocktails and Hors d'oeuvres
+                </p>
               </div>
-              <h3 className="text-2xl mb-4 font-light text-[#5B9AA0]">First Dance</h3>
-              <p className="text-[#467479] font-sans font-light italic">The Great Lawn</p>
-            </div>
-            
-            <div className="relative flex flex-col items-center">
-              <div className="w-px h-12 bg-[#E0EBEB] mb-8" />
-              <div className="flex items-center space-x-4 mb-4">
-                <Clock className="text-[#5B9AA0]/60" size={20} />
-                <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9]">7:00 PM</span>
+
+              <div className="relative flex flex-col items-center group">
+                <div className="w-px h-12 bg-[#E0EBEB] mb-8 group-hover:bg-[#5B9AA0] transition-colors" />
+                <div className="flex items-center space-x-4 mb-4">
+                  <Clock className="text-[#5B9AA0]/60" size={20} />
+                  <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9] font-semibold">6:30 PM</span>
+                </div>
+                <h3 className="text-3xl mb-4 font-light text-[#5B9AA0]">First Dance</h3>
+                <p className="text-[#467479] font-sans font-light italic text-lg">The Newly Weds Promenade</p>
               </div>
-              <h3 className="text-2xl mb-4 font-light text-[#5B9AA0]">Dinner</h3>
-              <p className="text-[#467479] font-sans font-light italic">The Great Lawn</p>
+
+              <div className="relative flex flex-col items-center group">
+                <div className="w-px h-12 bg-[#E0EBEB] mb-8 group-hover:bg-[#5B9AA0] transition-colors" />
+                <div className="flex items-center space-x-4 mb-4">
+                  <Clock className="text-[#5B9AA0]/60" size={20} />
+                  <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9] font-semibold">7:00 PM</span>
+                </div>
+                <h3 className="text-3xl mb-4 font-light text-[#5B9AA0]">Dinner</h3>
+                <p className="text-[#467479] font-sans font-light italic text-lg">The Grand Buffet</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Travel & Accomm */}
-      <section id="travel" className="bg-[#FDFCF8] text-[#467479] py-24 md:py-32 px-6">
+      {/* Details Section (Renamed from Travel) */}
+      <section id="details" className="bg-[#F8FBFB] text-[#467479] py-24 md:py-32 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <Navigation className="mx-auto mb-6 text-[#5B9AA0] opacity-60" size={32} />
-            <h2 className="text-5xl font-light text-[#5B9AA0] mb-4">Travel & Stay</h2>
-            <p className="font-sans font-light max-w-xl mx-auto text-[#7FB5B9]">
-              Okatie is centrally located between Beaufort and Hilton Head. 
-              We recommend flying into SAV or CHS.
+            <h2 className="text-5xl font-light text-[#5B9AA0] mb-6">The Details</h2>
+            <p className="font-sans font-light max-w-xl mx-auto text-[#7FB5B9] text-lg">
+              Everything you need to know for our weekend in Okatie.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-sm border border-[#E0EBEB] shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white p-8 rounded-sm border border-[#E0EBEB] shadow-sm flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               <div>
-                <h3 className="text-xl font-light text-[#5B9AA0] mb-4">Air Travel</h3>
+                <h3 className="text-xl font-light text-[#5B9AA0] mb-4 border-b border-[#E0EBEB] pb-4">Air Travel</h3>
                 <p className="font-sans font-light text-sm leading-relaxed mb-6">
-                  <strong>Savannah/Hilton Head (SAV)</strong> is just 35 miles away. <br />
-                  <strong>Charleston (CHS)</strong> is approximately 75 miles away.
+                  <strong>Savannah/Hilton Head (SAV)</strong> is just 35 miles away. <br /><br />
+                  <strong>Charleston (CHS)</strong> is approximately 75 miles away and offers a scenic drive.
                 </p>
               </div>
               <a 
                 href="https://www.google.com/travel/flights/search?tfs=CBwQAhooEgoyMDI2LTA1LTIxagwIAxIIL20vMHJoNmtyDAgDEggvbS8wX2tyNBooEgoyMDI2LTA1LTI0agwIAxIIL20vMF9rcjRyDAgDEggvbS8wcmg2a0ABSAFwAYIBCwj___________8BmAEB&hl=en-US&gl=US" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-xs font-sans uppercase tracking-widest text-[#5B9AA0] hover:text-[#467479] transition-colors"
+                className="text-xs font-sans uppercase tracking-widest text-[#5B9AA0] hover:text-[#467479] transition-colors inline-flex items-center"
               >
-                Find Flights →
+                Find Flights <span className="ml-2">→</span>
               </a>
             </div>
 
             {/* Hotel Block */}
-            <div className="bg-white p-8 rounded-sm border border-[#E0EBEB] shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div className="bg-white p-8 rounded-sm border border-[#E0EBEB] shadow-md flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
               <div>
-                <h3 className="text-xl font-light text-[#5B9AA0] mb-4">Where to Stay</h3>
+                <h3 className="text-xl font-light text-[#5B9AA0] mb-4 border-b border-[#E0EBEB] pb-4">Where to Stay</h3>
                 <p className="font-sans font-light text-sm leading-relaxed mb-4">
                   We have reserved a block of rooms at the <strong>Hampton Inn & Suites Bluffton-Sun City</strong>. 
                   The hotel is a <strong>20 minute drive</strong> to Legacy Lookout. <strong>After RSVPing, we will email
                   you the Hotel Block Group and Code for reservation</strong>.
                 </p>
-                <div className="mb-6">
+                <div className="mb-6 bg-[#FDFCF8] p-4 rounded border border-[#E0EBEB]">
                    <p className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9] mb-2">Available Rooms:</p>
                    <ul className="font-sans font-light text-sm text-[#467479] space-y-1 list-disc pl-4">
                      <li>10 Double Queen Rooms</li>
@@ -507,23 +526,41 @@ const App = () => {
                 href="https://www.hilton.com/en/hotels/bfnschx-hampton-suites-bluffton-sun-city/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-xs font-sans uppercase tracking-widest text-[#5B9AA0] hover:text-[#467479] transition-colors"
+                className="text-xs font-sans uppercase tracking-widest text-[#5B9AA0] hover:text-[#467479] transition-colors inline-flex items-center"
               >
-                Book Your Room →
+                Book Your Room <span className="ml-2">→</span>
               </a>
             </div>
 
-            <div className="bg-white p-8 rounded-sm border border-[#E0EBEB] shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div className="bg-white p-8 rounded-sm border border-[#E0EBEB] shadow-sm flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               <div>
-                <h3 className="text-xl font-light text-[#5B9AA0] mb-4">Transportation</h3>
+                <h3 className="text-xl font-light text-[#5B9AA0] mb-4 border-b border-[#E0EBEB] pb-4">Transportation</h3>
                 <p className="font-sans font-light text-sm leading-relaxed mb-6">
-                  Parking is available onsite for around <strong>20 vehicles</strong>. Because this is limited and there will 
-                  be alcohol served, we will potentially work with a shuttle company to bring guests to and from the Hampton 
-                  Inn Hotel depending on final reservation count. To further accomodate non-drivers, we also plan on 
-                  <strong> providing Uber and Lyft vouchers</strong> for use after the wedding ceremony.
+                  A shuttle will be provided from the downtown Beaufort Inn at 3:45 PM on Saturday. 
+                  <br/><br/>
+                  Please be prompt as the shuttle cannot wait!
                 </p>
               </div>
-              <p className="text-xs font-sans uppercase tracking-widest text-[#7FB5B9] opacity-60 italic">Limited parking, rideshare vouchers, and potential shuttle</p>
+              <p className="text-xs font-sans uppercase tracking-widest text-[#7FB5B9] opacity-80 italic">Parking also available on-site</p>
+            </div>
+
+            {/* Attire Block (Added) */}
+            <div className="bg-white p-8 rounded-sm border border-[#E0EBEB] shadow-sm flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <div>
+                <h3 className="text-xl font-light text-[#5B9AA0] mb-4 border-b border-[#E0EBEB] pb-4 flex items-center gap-2">
+                  Attire
+                </h3>
+                <p className="font-sans font-light text-sm leading-relaxed mb-6">
+                  <strong>REHEARSAL: COCKTAIL ATTIRE</strong><br/>
+                    Ladies come dressed in cocktail attire. Gentlemen come dressed in polos and slacks. Think coastal meets country.
+                    <br/><br/><strong>WEDDING DAY: BLACK TIE</strong><br/>
+                    We kindly ask all guests to adhere to our requested dress code. Ladies please opt for floor-length dresses and gentleman 
+                    opt for dark suits. We kindly request that you avoid wearing the color green and any dress with a scarf like 
+                    feature on the neck. 
+                    <br/><br/>
+                </p>
+              </div>
+              <p className="text-xs font-sans uppercase tracking-widest text-[#7FB5B9] opacity-80 italic">Reach out to Erica for questions.</p>
             </div>
           </div>
         </div>
@@ -784,6 +821,35 @@ const App = () => {
           Made with love for our family and friends.
         </p>
       </footer>
+    </div>
+  );
+};
+
+// Reusable animated frame component
+const AnimatedFrame = ({ children, className }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const domRef = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => setIsVisible(entry.isIntersecting));
+    }, { threshold: 0.1 });
+    
+    const currentRef = domRef.current;
+    if (currentRef) observer.observe(currentRef);
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={domRef}
+      className={`transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-75 blur-sm'}`}
+    >
+      <div className={className}>
+        {children}
+      </div>
     </div>
   );
 };
