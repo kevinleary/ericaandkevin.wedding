@@ -22,6 +22,10 @@ const App = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    address: '',
+    city: '',
+    state: '',
+    zip: '',
     attending: 'yes',
     plus1: 'no',
     hotel: 'yes',
@@ -95,6 +99,10 @@ const App = () => {
         setFormData({
           name: '',
           email: '',
+          address: '',
+          city: '',
+          state: '',
+          zip: '',
           attending: 'yes',
           guests: '1',
           hotel: 'yes',
@@ -400,6 +408,7 @@ const App = () => {
 
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-light mb-16 italic text-[#5B9AA0]">The Big Day</h2>
+          <p className="text-xl tracking-widest uppercase text-[#7FB5B9] mb-16 font-light">May 23, 2026</p>
           <div className="space-y-16">
             <div className="relative flex flex-col items-center">
               <div className="w-px h-12 bg-[#E0EBEB] mb-8" />
@@ -535,7 +544,7 @@ const App = () => {
               <p className="text-[#467479] font-sans font-light">We can't wait to see you in South Carolina.</p>
               <button 
                 onClick={() => setRSVPStatus('idle')}
-                className="mt-8 text-[#7FB5B9] font-sans text-xs uppercase tracking-widest border-b border-[#E0EBEB] hover:text-[#5B9AA0]"
+                className="mt-8 text-[#7FB5B9] font-sans text-xs uppercase cursor-pointer tracking-widest border-b border-[#E0EBEB] hover:text-[#5B9AA0]"
               >
                 Submit another response
               </button>
@@ -568,56 +577,110 @@ const App = () => {
                 />
               </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Attendance</label>
-                  <select 
-                    className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] appearance-none text-[#467479]"
-                    value={formData.attending}
-                    onChange={(e) => setFormData({...formData, attending: e.target.value})}
-                  >
-                    <option value="yes">Joyfully Accepts</option>
-                    <option value="no">Regretfully Declines</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Bringing a +1?</label>
-                  <select 
-                    className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
-                    value={formData.plus1}
-                    onChange={(e) => setFormData({...formData, plus1: e.target.value})}
-                  >
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                  </select>
-                </div>
+              {/* Attendance Selection - Moved UP to determine visibility of other fields */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Attendance</label>
+                <select 
+                  name="attending"
+                  className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] appearance-none text-[#467479]"
+                  value={formData.attending}
+                  onChange={(e) => setFormData({...formData, attending: e.target.value})}
+                >
+                  <option value="yes">Joyfully Accepts</option>
+                  <option value="no">Regretfully Declines</option>
+                </select>
               </div>
 
-              {/* REPLACED: Dietary restrictions with Hotel and Driving questions */}
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Plan to Book Hotel?</label>
-                  <select 
-                    className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
-                    value={formData.hotel}
-                    onChange={(e) => setFormData({...formData, hotel: e.target.value})}
-                  >
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                  </select>
+              {/* Conditional Fields: Only show if attending is 'yes' */}
+              {formData.attending === 'yes' && (
+                <div className="animate-slide-up space-y-8">
+                  {/* Address Fields */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Mailing Address</label>
+                    <input 
+                      type="text" 
+                      name="address"
+                      className="w-full border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] transition-colors text-lg font-light text-[#467479] bg-transparent"
+                      placeholder="Street Address"
+                      value={formData.address}
+                      onChange={(e) => setFormData({...formData, address: e.target.value})}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-12 gap-4">
+                    <div className="col-span-6 md:col-span-5 space-y-2">
+                      <input 
+                        type="text" 
+                        name="city"
+                        className="w-full border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] transition-colors text-lg font-light text-[#467479] bg-transparent"
+                        placeholder="City"
+                        value={formData.city}
+                        onChange={(e) => setFormData({...formData, city: e.target.value})}
+                      />
+                    </div>
+                    <div className="col-span-3 md:col-span-4 space-y-2">
+                      <input 
+                        type="text" 
+                        name="state"
+                        className="w-full border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] transition-colors text-lg font-light text-[#467479] bg-transparent"
+                        placeholder="State"
+                        value={formData.state}
+                        onChange={(e) => setFormData({...formData, state: e.target.value})}
+                      />
+                    </div>
+                    <div className="col-span-3 space-y-2">
+                      <input 
+                        type="text" 
+                        name="zip"
+                        className="w-full border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] transition-colors text-lg font-light text-[#467479] bg-transparent"
+                        placeholder="Zip"
+                        value={formData.zip}
+                        onChange={(e) => setFormData({...formData, zip: e.target.value})}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Bringing a +1?</label>
+                      <select 
+                        className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
+                        value={formData.plus1}
+                        onChange={(e) => setFormData({...formData, plus1: e.target.value})}
+                      >
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
+
+                  {/* Travel Info */}
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Plan to Book Hotel?</label>
+                      <select 
+                        name="hotel"
+                        className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
+                        value={formData.hotel}
+                        onChange={(e) => setFormData({...formData, hotel: e.target.value})}
+                      >
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Will you be Driving?</label>
+                      <select 
+                        name="driving"
+                        className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
+                        value={formData.driving}
+                        onChange={(e) => setFormData({...formData, driving: e.target.value})}
+                      >
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Plan on driving to venue?</label>
-                  <select 
-                    className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
-                    value={formData.driving}
-                    onChange={(e) => setFormData({...formData, driving: e.target.value})}
-                  >
-                    <option value="no">No</option>
-                    <option value="yes">Yes</option>
-                  </select>
-                </div>
-              </div>
+              )}
 
               <button 
                 type="submit" 
