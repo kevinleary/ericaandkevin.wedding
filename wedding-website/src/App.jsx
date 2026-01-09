@@ -37,24 +37,24 @@ const App = () => {
     document.title = "Erica & Kevin | May 23, 2026";
 
     // Set Open Graph Meta Tags for Link Previews (iMessage, etc.)
-    const metaTags = [
-      { property: 'og:title', content: 'Erica & Kevin | May 21-24, 2026' },
-      { property: 'og:description', content: 'Join us for our wedding celebration in Okatie, South Carolina.' },
-      //{ property: 'og:image', content: 'https://ericaandkevin.wedding/3R5A2785.jpg' },
-      { property: 'og:image', content: window.location.origin + '/3R5A2785.jpg' },
-      { property: 'og:url', content: window.location.href },
-      { property: 'og:type', content: 'website' }
-    ];
+    // const metaTags = [
+    //   { property: 'og:title', content: 'Erica & Kevin | May 21-24, 2026' },
+    //   { property: 'og:description', content: 'Join us for our wedding celebration in Okatie, South Carolina.' },
+    //   //{ property: 'og:image', content: 'https://ericaandkevin.wedding/3R5A2785.jpg' },
+    //   { property: 'og:image', content: window.location.origin + '/3R5A2785.jpg' },
+    //   { property: 'og:url', content: window.location.href },
+    //   { property: 'og:type', content: 'website' }
+    // ];
 
-    metaTags.forEach(tag => {
-      let element = document.querySelector(`meta[property="${tag.property}"]`);
-      if (!element) {
-        element = document.createElement('meta');
-        element.setAttribute('property', tag.property);
-        document.head.appendChild(element);
-      }
-      element.setAttribute('content', tag.content);
-    });
+    // metaTags.forEach(tag => {
+    //   let element = document.querySelector(`meta[property="${tag.property}"]`);
+    //   if (!element) {
+    //     element = document.createElement('meta');
+    //     element.setAttribute('property', tag.property);
+    //     document.head.appendChild(element);
+    //   }
+    //   element.setAttribute('content', tag.content);
+    // });
 
     // Set the favicon (Minimal Powerboat SVG)
     const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
