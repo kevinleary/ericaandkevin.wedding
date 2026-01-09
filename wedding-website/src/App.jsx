@@ -40,8 +40,8 @@ const App = () => {
     // const metaTags = [
     //   { property: 'og:title', content: 'Erica & Kevin | May 21-24, 2026' },
     //   { property: 'og:description', content: 'Join us for our wedding celebration in Okatie, South Carolina.' },
-    //   //{ property: 'og:image', content: 'https://ericaandkevin.wedding/3R5A2785.jpg' },
-    //   { property: 'og:image', content: window.location.origin + '/3R5A2785.jpg' },
+    //   { property: 'og:image', content: 'https://ericaandkevin.wedding/3R5A2785.jpg' },
+    //   // { property: 'og:image', content: window.location.origin + '/3R5A2785.jpg' },
     //   { property: 'og:url', content: window.location.href },
     //   { property: 'og:type', content: 'website' }
     // ];
