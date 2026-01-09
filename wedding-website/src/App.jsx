@@ -539,7 +539,7 @@ const App = () => {
                 <p className="font-sans font-light text-sm leading-relaxed mb-6">
                   Parking is available onsite for around <strong>20 vehicles</strong>. Because this is limited and there will 
                   be alcohol served, we will potentially work with a shuttle company to bring guests to and from the Hampton 
-                  Inn Hotel depending on final reservation count. To further accomodate non-drivers, we also plan on 
+                  Inn Hotel depending on final reservation count. <br/><br/>To further accomodate non-drivers, we also plan on 
                   <strong> providing Uber and Lyft vouchers</strong> for use after the wedding ceremony.
                 </p>
               </div>
