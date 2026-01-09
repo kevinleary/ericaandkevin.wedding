@@ -556,7 +556,7 @@ const App = () => {
                     Ladies come dressed in cocktail attire. Gentlemen come dressed in polos and slacks. Think coastal meets country.
                     <br/><br/><strong>WEDDING DAY: BLACK TIE</strong><br/>
                     We kindly ask all guests to adhere to our requested dress code. Ladies please opt for floor-length dresses and gentleman 
-                    opt for dark suits. We kindly request that you avoid wearing the color green and any dress with a scarf like 
+                    opt for tuxedos. We kindly request that you avoid wearing the color green and any dress with a scarf like 
                     feature on the neck. 
                     <br/><br/>
                 </p>
