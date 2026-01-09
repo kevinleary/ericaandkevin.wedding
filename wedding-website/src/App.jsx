@@ -40,7 +40,7 @@ const App = () => {
     const metaTags = [
       { property: 'og:title', content: 'Erica & Kevin | May 21-24, 2026' },
       { property: 'og:description', content: 'Join us for our wedding celebration in Okatie, South Carolina.' },
-      { property: 'og:image', content: 'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' },
+      { property: 'og:image', content: '3R5A2785.jpg' },
       { property: 'og:url', content: window.location.href },
       { property: 'og:type', content: 'website' }
     ];
