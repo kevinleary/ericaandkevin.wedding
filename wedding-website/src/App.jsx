@@ -537,12 +537,13 @@ const App = () => {
               <div>
                 <h3 className="text-xl font-light text-[#5B9AA0] mb-4 border-b border-[#E0EBEB] pb-4">Transportation</h3>
                 <p className="font-sans font-light text-sm leading-relaxed mb-6">
-                  A shuttle will be provided from the downtown Beaufort Inn at 3:45 PM on Saturday. 
-                  <br/><br/>
-                  Please be prompt as the shuttle cannot wait!
+                  Parking is available onsite for around <strong>20 vehicles</strong>. Because this is limited and there will 
+                  be alcohol served, we will potentially work with a shuttle company to bring guests to and from the Hampton 
+                  Inn Hotel depending on final reservation count. To further accomodate non-drivers, we also plan on 
+                  <strong> providing Uber and Lyft vouchers</strong> for use after the wedding ceremony.
                 </p>
               </div>
-              <p className="text-xs font-sans uppercase tracking-widest text-[#7FB5B9] opacity-80 italic">Parking also available on-site</p>
+              <p className="text-xs font-sans uppercase tracking-widest text-[#7FB5B9] opacity-80 italic">Limited parking, rideshare vouchers, and potential shuttle</p>
             </div>
 
             {/* Attire Block (Added) */}
