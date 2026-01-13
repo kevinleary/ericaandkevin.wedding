@@ -444,7 +444,7 @@ const App = () => {
                 <div className="w-px h-12 bg-[#E0EBEB] mb-8 group-hover:bg-[#5B9AA0] transition-colors" />
                 <div className="flex items-center space-x-4 mb-4">
                   <Clock className="text-[#5B9AA0]/60" size={20} />
-                  <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9] font-semibold">4:45 PM</span>
+                  <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9] font-semibold">4:30 PM</span>
                 </div>
                 <h3 className="text-3xl mb-4 font-light text-[#5B9AA0]">Cocktail Hour</h3>
                 <p className="text-[#467479] font-sans font-light italic text-center max-w-sm text-lg">
@@ -456,9 +456,9 @@ const App = () => {
                 <div className="w-px h-12 bg-[#E0EBEB] mb-8 group-hover:bg-[#5B9AA0] transition-colors" />
                 <div className="flex items-center space-x-4 mb-4">
                   <Clock className="text-[#5B9AA0]/60" size={20} />
-                  <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9] font-semibold">6:30 PM</span>
+                  <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9] font-semibold">6:00 PM</span>
                 </div>
-                <h3 className="text-3xl mb-4 font-light text-[#5B9AA0]">First Dance</h3>
+                <h3 className="text-3xl mb-4 font-light text-[#5B9AA0]">The Grand Entrance and First Dance</h3>
                 <p className="text-[#467479] font-sans font-light italic text-lg">The Newly Weds Promenade</p>
               </div>
 
@@ -466,10 +466,10 @@ const App = () => {
                 <div className="w-px h-12 bg-[#E0EBEB] mb-8 group-hover:bg-[#5B9AA0] transition-colors" />
                 <div className="flex items-center space-x-4 mb-4">
                   <Clock className="text-[#5B9AA0]/60" size={20} />
-                  <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9] font-semibold">7:00 PM</span>
+                  <span className="font-sans text-sm tracking-widest uppercase text-[#7FB5B9] font-semibold">6:30 PM</span>
                 </div>
                 <h3 className="text-3xl mb-4 font-light text-[#5B9AA0]">Dinner</h3>
-                <p className="text-[#467479] font-sans font-light italic text-lg">The Grand Buffet</p>
+                <p className="text-[#467479] font-sans font-light italic text-lg">The Extravagent Buffet</p>
               </div>
             </div>
           </div>
