@@ -27,9 +27,7 @@ const App = () => {
     state: '',
     zip: '',
     attending: 'yes',
-    plus1: 'no',
-    hotel: 'yes',
-    driving: 'no'
+    hotel: 'yes'
   });
 
   useEffect(() => {
@@ -105,9 +103,7 @@ const App = () => {
           state: '',
           zip: '',
           attending: 'yes',
-          guests: '1',
-          hotel: 'yes',
-          driving: 'no'
+          hotel: 'yes'
         });
       } else {
         console.error("Form submission failed");
@@ -580,7 +576,7 @@ const App = () => {
             <div className="text-center py-12 animate-in zoom-in-95 duration-500">
               <Heart className="mx-auto text-[#5B9AA0] mb-6" size={48} />
               <h3 className="text-2xl mb-2 text-[#5B9AA0]">Thank you!</h3>
-              <p className="text-[#467479] font-sans font-light">We can't wait to see you in South Carolina.</p>
+              <p className="text-[#467479] font-sans font-light">Your formal invitation will follow soon! We can't wait to see you in South Carolina.</p>
               <button 
                 onClick={() => setRSVPStatus('idle')}
                 className="mt-8 text-[#7FB5B9] font-sans text-xs uppercase cursor-pointer tracking-widest border-b border-[#E0EBEB] hover:text-[#5B9AA0]"
@@ -679,18 +675,6 @@ const App = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Bringing a +1?</label>
-                      <select 
-                        className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
-                        value={formData.plus1}
-                        onChange={(e) => setFormData({...formData, plus1: e.target.value})}
-                      >
-                      <option value="yes">Yes</option>
-                      <option value="no">No</option>
-                    </select>
-                  </div>
-
                   {/* Travel Info */}
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-2">
@@ -703,18 +687,6 @@ const App = () => {
                       >
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
-                      </select>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-[#7FB5B9]">Will you be Driving?</label>
-                      <select 
-                        name="driving"
-                        className="w-full bg-transparent border-b-2 border-[#E0EBEB] py-3 focus:outline-none focus:border-[#5B9AA0] text-[#467479]"
-                        value={formData.driving}
-                        onChange={(e) => setFormData({...formData, driving: e.target.value})}
-                      >
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
                       </select>
                     </div>
                   </div>
