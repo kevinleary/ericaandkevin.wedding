@@ -549,8 +549,8 @@ const App = () => {
                   Attire
                 </h3>
                 <p className="font-sans font-light text-sm leading-relaxed mb-6">
-                  <strong>REHEARSAL: COCKTAIL ATTIRE</strong><br/>
-                    Ladies come dressed in cocktail attire. Gentlemen come dressed in polos and slacks. Think coastal meets country.
+                  <strong>REHEARSAL</strong><br/>
+                    Ladies come dressed in cocktail dresses. Gentlemen come dressed in polos and slacks. Think coastal meets country.
                     <br/><br/><strong>WEDDING DAY: BLACK TIE</strong><br/>
                     We kindly ask all guests to adhere to our requested dress code. Ladies please opt for floor-length dresses and gentleman 
                     opt for tuxedos. We kindly request that you avoid wearing the color green and any dress with a scarf like 
