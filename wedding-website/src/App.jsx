@@ -217,7 +217,7 @@ const App = () => {
           
           <div className="space-y-2 text-[#2C5257] drop-shadow-sm">
             <p className="text-xl md:text-2xl font-light tracking-widest">OKATIE, SOUTH CAROLINA</p>
-            <p className="text-lg md:text-xl font-light tracking-widest">MAY 21-24, 2026</p>
+            <p className="text-lg md:text-xl font-light tracking-widest">MAY 22-23, 2026</p>
           </div>
 
           <div className="mt-12">
