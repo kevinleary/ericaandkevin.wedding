@@ -551,9 +551,9 @@ const App = () => {
                 <p className="font-sans font-light text-sm leading-relaxed mb-6">
                   <strong>REHEARSAL</strong><br/>
                     Ladies come dressed in cocktail dresses. Gentlemen come dressed in polos and slacks. Think coastal meets country.
-                    <br/><br/><strong>WEDDING DAY: BLACK TIE</strong><br/>
-                    We kindly ask all guests to adhere to our requested dress code. Ladies please opt for floor-length dresses and gentleman 
-                    opt for tuxedos. We kindly request that you avoid wearing the color green and any dress with a scarf like 
+                    <br/><br/><strong>WEDDING DAY: BLACK TIE OPTIONAL</strong><br/>
+                    We kindly ask all guests to adhere to our requested dress code. Ladies please opt for floor-length dresses or elegant midis and gentleman 
+                    opt for tuxedos or dark suits with ties. We kindly request that you avoid wearing the color green and any dress with a scarf like 
                     feature on the neck. 
                     <br/><br/>
                 </p>
@@ -569,7 +569,7 @@ const App = () => {
         <div className="max-w-2xl mx-auto bg-white shadow-2xl p-10 md:p-16 rounded-sm border border-[#E0EBEB]">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-light mb-4 text-[#5B9AA0]">Kindly Respond</h2>
-            <p className="font-sans text-sm uppercase tracking-widest text-[#7FB5B9] font-medium">Please RSVP by March 1st, 2026</p>
+            <p className="font-sans text-sm uppercase tracking-widest text-[#7FB5B9] font-medium">Please RSVP by April 1st, 2026</p>
           </div>
 
           {RSVPStatus === 'success' ? (
