@@ -550,7 +550,7 @@ const App = () => {
                 </h3>
                 <p className="font-sans font-light text-sm leading-relaxed mb-6">
                   <strong>REHEARSAL</strong><br/>
-                    Ladies come dressed in cocktail dresses. Gentlemen come dressed in polos and slacks. Think coastal meets country.
+                    Ladies come dressed in dressy-casual. Gentlemen come dressed in polos and slacks. Think coastal meets country.
                     <br/><br/><strong>WEDDING DAY: BLACK TIE OPTIONAL</strong><br/>
                     We kindly ask all guests to adhere to our requested dress code. Ladies please opt for floor-length dresses or elegant midis and gentleman 
                     opt for tuxedos or dark suits with ties. We kindly request that you avoid wearing the color green and any dress with a scarf like 
